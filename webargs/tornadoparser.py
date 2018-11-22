@@ -117,7 +117,7 @@ class TornadoParser(core.Parser):
         """Handles errors during parsing. Raises a `tornado.web.HTTPError`
         with a 400 error.
         """
-        status_code = getattr(error, "status_code", core.DEFAULT_VALIDATION_STATUS)
+        status_code = self.DEFAULT_VALIDATION_STATUS
         if status_code == 422:
             reason = "Unprocessable Entity"
         else:

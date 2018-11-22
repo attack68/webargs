@@ -61,11 +61,8 @@ class BottleParser(core.Parser):
         """Handles errors during parsing. Aborts the current request with a
         400 error.
         """
-        status_code = getattr(error, "status_code", self.DEFAULT_VALIDATION_STATUS)
-        headers = getattr(error, "headers", {})
-        raise bottle.HTTPError(
-            status=status_code, body=error.messages, headers=headers, exception=error
-        )
+        status_code = self.DEFAULT_VALIDATION_STATUS
+        raise bottle.HTTPError(status=status_code, body=error.messages, exception=error)
 
     def get_default_request(self):
         """Override to use bottle's thread-local request object by default."""

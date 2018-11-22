@@ -141,7 +141,8 @@ class AIOHTTPParser(AsyncParser):
 
     def handle_error(self, error, req, schema):
         """Handle ValidationErrors and return a JSON response of error messages to the client."""
-        error_class = exception_map.get(error.status_code)
+        status_code = self.DEFAULT_VALIDATION_STATUS
+        error_class = exception_map.get(status_code)
         if not error_class:
             raise LookupError("No exception for {0}".format(error.status_code))
         raise error_class(
