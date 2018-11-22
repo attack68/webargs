@@ -5,7 +5,7 @@ from aiohttp.web import json_response
 from aiohttp import web
 import marshmallow as ma
 
-from webargs import fields, ValidationError
+from webargs import fields
 from webargs.aiohttpparser import parser, use_args, use_kwargs
 from webargs.core import MARSHMALLOW_VERSION_INFO
 
@@ -75,7 +75,7 @@ async def echo_use_kwargs_with_path_param(request, value):
 
 async def always_error(request):
     def always_fail(value):
-        raise ValidationError("something went wrong")
+        raise ma.ValidationError("something went wrong")
 
     args = {"text": fields.Str(validate=always_fail)}
     parsed = await parser.parse(args, request)
